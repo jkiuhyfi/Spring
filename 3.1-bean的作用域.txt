@@ -1,0 +1,10 @@
+
+    <bean id="accountService"  scope="prototype" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+
+    scope表示bean的作用范围:
+     sigleton:单例也是默认
+     prototype:多例
+     requst:一次请求访问范围
+     session:一次会话范围
+     gload-session:一次集群会话的范围
+   

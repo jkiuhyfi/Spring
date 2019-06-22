@@ -1,0 +1,7 @@
+@RunWith(SpringJUnit4ClassRunner.class)  相当于main
+@ContextConfiguration(classes = SpringConfiguration.class)  相当于spring运行器
+
+
+
+
+@ContextConfiguration(locations = "classpath:bean.xml")

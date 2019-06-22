@@ -1,0 +1,26 @@
+DI-当前类用到其他类的对象
+
+<!--
+      1.构造方法注入:  constructor-arg name ref
+      name
+      value
+      ref:引入关联的bean对象
+    -->
+    <bean id="accountService" scope="singleton" class="com.itheima.service.impl.AccountServiceImpl">
+        <constructor-arg name="name" value="陈开花"></constructor-arg>
+        <constructor-arg name="id" value="5"></constructor-arg>
+        <constructor-arg name="date" ref="date"></constructor-arg>
+    </bean>
+
+    <!--配置一个日期-->
+    <bean id="date" class="java.util.Date"></bean>
+
+    <!--
+     set方式注入: property  name  ref 
+     -->
+    <bean id="accountService2" class="com.itheima.service.impl.AccountServiceImpl2">
+
+        <property name="name" value="陈开焕"></property>
+        <property name="id" value="2"></property>
+        <property name="date" ref="date"></property>
+    </bean>

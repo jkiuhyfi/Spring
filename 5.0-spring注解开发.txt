@@ -1,0 +1,51 @@
+@Component("AccountService") id就是AccountService
+1.0-相当于bean
+<bean id="AccountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+1.1-记得扫描注解
+ <context:component-scan base-package="com.itheima"></context:component-scan>
+
+
+
+按bean类型注入
+
+    @Autowired
+    private IAccountDao accountDao;  自动按类型注入
+            数据类型     变量名称
+    
+   先按类型去匹配baen对象类型，若有多个bean对象类型，再按变量名称去匹配
+
+   // @Autowired //按类型注入
+//    @Qualifier("accountDao1") //他依赖Autowired，再按名称注入
+      @Resource(name = "accountDao2") //根据bean的id注入
+
+    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+       <property name="accountDao" ref="accountDao"></property>
+    </bean>
+    
+    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+    </bean>
+
+基本类型的注入
+注意点 *.properties指定他的文件路径
+@value("${name}")
+
+
+作用域
+@Scope("prototype") 多例
+
+生命周期
+
+初始化注解:@PostConstruct
+销毁注解:@PreDestroy
+
+   @PostConstruct
+    public void init(){
+        System.out.println("初始化");
+    }
+    @PreDestroy
+    public void de(){
+        System.out.println("销毁");
+    }
+
+相当于:
+<bean init-method="init" destroy-method="de"></bean>

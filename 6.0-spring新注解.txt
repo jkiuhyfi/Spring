@@ -1,0 +1,100 @@
+ /*
+     配置类:他的作用跟bean.xml一样
+
+     @Configuration :相当于配置类  bean.xml
+
+     @ComponentScan({"com.itheima","confignation"}) 相当于扫描包(扫描所有注解)
+     相当于:<context:component-scan base-package="com.itheima"></context:component-scan>
+
+     @bean
+     相当于
+      <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <!--注入数据源-->
+        <constructor-arg name="ds" ref="dataSource"></constructor-arg>
+    </bean>
+
+     @Bean   方法名相当于 bean中id,数据的返回类型相当于class
+            注入:构造方法: new QueryRunner(dataSource);
+                 还有一种用property:用set
+
+    public QueryRunner runner(DataSource dataSource){
+        return new QueryRunner(dataSource);
+    }
+
+    @Scope("prototype") 相当于多例
+
+
+    @Import(JdbcConfig.class) 相当于导入其他配置类
+    还一种，扫描，在添加@Configuration
+
+    @PropertySource("classpath:jdbcConfig.properties") 相当于指定properties文件的路径
+
+ */
+
+
+
+核心容器:    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+
+
+
+
+
+
+
+
+@Configuration
+@ComponentScan({"com.itheima","confignation"})
+@Import(JdbcConfig.class)
+@PropertySource("classpath:jdbcConfig.properties")
+public class SpringConfiguration {
+
+
+    }
+
+
+
+
+public class JdbcConfig {
+
+
+    @Value("${jdbc.driver}")
+    private String driver;
+
+    @Value("${jdbc.url}")
+    private String url;
+
+    @Value("${jdbc.username}")
+    private String username;
+
+    @Value("${jdbc.password}")
+    private String password;
+
+    @Bean
+    @Scope("prototype")
+    public QueryRunner runner(DataSource dataSource){
+
+        return new QueryRunner(dataSource);
+    }
+
+    @Bean
+    public ComboPooledDataSource dataSource(){
+        ComboPooledDataSource cs = new ComboPooledDataSource();
+        try {
+            cs.setDriverClass(driver);
+            cs.setJdbcUrl(url);
+            cs.setUser(username);
+            cs.setPassword(password);
+            return cs;
+        }catch (Exception c){
+            return null;
+        }
+
+    }
+}
+
+
+
+
+
+
+

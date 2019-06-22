@@ -1,0 +1,16 @@
+单例:
+
+      出生  :容器创建时候，创建对象  init-method
+      活着  :只要容器还在，对象就一直活着
+      死亡 :容器销毁，对象销毁       destroy-method
+      单例对象与容器生命周期相同
+
+
+多例:
+
+      出生 :当我们使用对象时,创建对象
+      活着:对象使用过程中就一直活着
+      死亡: 对象长期不使用，由垃圾回收器回收
+
+ <bean id="accountService" init-method="init" destroy-method="destroy" scope="prototype" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+

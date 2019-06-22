@@ -1,0 +1,2 @@
+   //ApplicationContext创建对象立即加载  适用单例
+   //beanfactory 创建对象延迟加载，对象需要时候加载  多例
